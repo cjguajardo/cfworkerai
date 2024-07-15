@@ -5,7 +5,7 @@ The **[CFWorkerAI provider](https://github.com/cjguajardo/cfworkerai/blob/main/R
 More information about the Cloudflare AI Gateway can be found at: **[Cloudflare AI Gateway](https://developers.cloudflare.com/ai-gateway/get-started/)**
 
 
-To see the available models, you can use the `cfworkerai` command: **[Available Models](https://developers.cloudflare.com/workers-ai/models/)**
+All available models can be found at: **[Available Models](https://developers.cloudflare.com/workers-ai/models/)**
 
 
 ## Important Note
@@ -43,10 +43,19 @@ import { cfworkerai } from 'cjguajardo/cfworkerai';
 import { cfworkerai } from 'cjguajardo/cfworkerai';
 import { generateText } from 'ai';
 
-const { text } = await generateText({
+const result1 = await generateText({
   model: cfworkerai('@cf/meta/llama-2-7b-chat-fp16'),
   prompt: 'Write a vegetarian lasagna recipe for 4 people.',
 });
+
+const result2 = await streamText( {
+    model: cfworkerai( '@cf/google/gemma-2b-it-lora' ),
+    messages: [
+        { role: 'system', content: 'You are a helpful AI assistant.' },
+        { role: 'user', content: 'What is the capital of France?' },
+        { role: 'system', content: 'Paris is the capital of France.' },
+    ],
+  } );
 ```
 
 <!-- ## Documentation -->

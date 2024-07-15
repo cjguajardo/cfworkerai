@@ -1,4 +1,4 @@
-// https://docs.cfworkerai.ai/platform/endpoints/
+// https://developers.cloudflare.com/workers-ai/models/
 export type CFWorkerAIChatModelId =
   | '@cf/meta/llama-2-7b-chat-fp16'
   | '@cf/mistral/mistral-7b-instruct-v0.1'
