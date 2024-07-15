@@ -31,7 +31,6 @@ describe( 'generateText', () => {
   it( 'Should generate a stream response', async () => {
     const result = await streamText( {
       model: cfworkerai( '@cf/meta/llama-2-7b-chat-fp16' ),
-      // prompt: 'Write a vegetarian lasagna recipe for 4 people.',
       messages: [
         {
           role: 'user',
