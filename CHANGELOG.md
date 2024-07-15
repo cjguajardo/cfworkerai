@@ -1,3 +1,3 @@
-# cjguajardo/cfworkerai
+# cfworkerai
 
 

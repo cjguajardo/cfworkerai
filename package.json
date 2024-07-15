@@ -1,7 +1,7 @@
 {
   "name": "cfworkerai",
   "description": "Vercel AI SDK provider for Cloudflare Workers",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "Apache-2.0",
   "sideEffects": false,
   "main": "./dist/index.js",
@@ -54,10 +54,10 @@
   "homepage": "https://sdk.vercel.ai/docs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cjguajardo/cfworkerai.git"
+    "url": "git+https://github.com/cfworkerai.git"
   },
   "bugs": {
-    "url": "https://github.com/cjguajardo/cfworkerai/issues"
+    "url": "https://github.com/cfworkerai/issues"
   },
   "keywords": [
     "ai"
