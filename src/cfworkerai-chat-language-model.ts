@@ -335,7 +335,7 @@ const cfworkeraiChatChunkSchema = z.object( {
           .nullable(),
       } ),
       finish_reason: z.string().nullable().optional(),
-      index: z.number(),
+      index: z.number().nullable().optional(),
     } ),
   ),
   usage: z

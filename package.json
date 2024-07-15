@@ -1,5 +1,5 @@
 {
-  "name": "@cjguajardo/cfworkerai",
+  "name": "cfworkerai",
   "description": "Vercel AI SDK provider for Cloudflare Workers",
   "version": "0.0.1",
   "license": "Apache-2.0",

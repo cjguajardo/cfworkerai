@@ -1,6 +1,6 @@
 # Vercel AI SDK - CFWorkerAI Provider
 
-The **[CFWorkerAI provider](https://sdk.vercel.ai/providers/ai-sdk-providers/cfworkerai)** for the [Vercel AI SDK](https://sdk.vercel.ai/docs) contains language model support for the CFWorkerAI chat API.
+The **[CFWorkerAI provider](https://github.com/cjguajardo/cfworkerai/blob/main/README.md)** for the [Vercel AI SDK](https://sdk.vercel.ai/docs) contains language model support for the CFWorkerAI chat API.
 
 ## Setup
 
@@ -32,4 +32,4 @@ const { text } = await generateText({
 
 ## Documentation
 
-<!-- Please check out the **[CFWorkerAI provider](https://sdk.vercel.ai/providers/ai-sdk-providers/cfworkerai)** for more information. -->
+Please check out the **[CFWorkerAI provider](https://github.com/cjguajardo/cfworkerai/blob/main/README.md)** for more information.

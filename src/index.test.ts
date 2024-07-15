@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { cfworkerai } from './cfworkerai-provider';
-import { generateText, GenerateTextResult, generateObject } from 'ai';
+import { generateText, GenerateTextResult, streamText, StreamTextResult } from 'ai';
 
 describe( 'generateText', () => {
   const model = '@cf/meta/llama-2-7b-chat-fp16'
@@ -26,5 +26,20 @@ describe( 'generateText', () => {
     } );
 
     expect( response ).toBeInstanceOf( GenerateTextResult )
+  } )
+
+  it( 'Should generate a stream response', async () => {
+    const result = await streamText( {
+      model: cfworkerai( '@cf/meta/llama-2-7b-chat-fp16' ),
+      // prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+      messages: [
+        {
+          role: 'user',
+          content: 'Write a vegetarian lasagna recipe for 4 people.'
+        }
+      ]
+    } );
+
+    expect( result ).toBeInstanceOf( StreamTextResult )
   } )
 } )
