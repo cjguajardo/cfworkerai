@@ -31,3 +31,18 @@ export interface CFWorkerAIToolMessage {
   name: string;
   content: string;
 }
+
+export type ChatCompletionContentPart =
+  | ChatCompletionContentPartText
+  | ChatCompletionContentPartImage;
+
+export interface ChatCompletionContentPartText {
+  type: 'text';
+  text: string;
+}
+export interface ChatCompletionContentPartImage {
+  type: 'image_url';
+  image_url: {
+    url: string;
+  };
+}

@@ -4,20 +4,20 @@ import {
   withoutTrailingSlash,
 } from '@ai-sdk/provider-utils';
 import { CFWorkerAIChatLanguageModel } from './cfworkerai-chat-language-model';
-import {
-  CFWorkerAIChatModelId,
-  CFWorkerAIChatSettings,
-} from './cfworkerai-chat-settings';
+import { CFWorkerAIChatModelId } from './cfworkerai-chat-settings';
+import { CFWorkerAISettings } from './cfworkerai-types';
 import {
   CFWorkerAIEmbeddingModelId,
   CFWorkerAIEmbeddingSettings,
 } from './cfworkerai-embedding-settings';
 import { CFWorkerAIEmbeddingModel } from './cfworkerai-embedding-model';
+import { CFWorkerAIRESTModel } from './cfworkerai-rest-model';
+import { CFWorkerAIRESTModelId, CFWorkerAIRESTSettings } from './cfworkerai-rest-settings';
 
 export interface CFWorkerAIProvider {
   (
     modelId: CFWorkerAIChatModelId,
-    settings?: CFWorkerAIChatSettings,
+    settings?: CFWorkerAISettings,
   ): CFWorkerAIChatLanguageModel;
 
   /**
@@ -25,7 +25,7 @@ Creates a model for text generation.
 */
   languageModel(
     modelId: CFWorkerAIChatModelId,
-    settings?: CFWorkerAIChatSettings,
+    settings?: CFWorkerAISettings,
   ): CFWorkerAIChatLanguageModel;
 
   /**
@@ -33,7 +33,7 @@ Creates a model for text generation.
 */
   chat(
     modelId: CFWorkerAIChatModelId,
-    settings?: CFWorkerAIChatSettings,
+    settings?: CFWorkerAISettings,
   ): CFWorkerAIChatLanguageModel;
 
   /**
@@ -51,6 +51,11 @@ Creates a model for text embeddings.
     modelId: CFWorkerAIEmbeddingModelId,
     settings?: CFWorkerAIEmbeddingSettings,
   ): CFWorkerAIEmbeddingModel;
+
+  rest(
+    modelId: CFWorkerAIRESTModelId,
+    settings?: CFWorkerAIRESTSettings,
+  ): CFWorkerAIRESTModel;
 }
 
 export interface CFWorkerAIProviderSettings {
@@ -117,7 +122,7 @@ export function createCFWorkerAI(
 
   const createChatModel = (
     modelId: CFWorkerAIChatModelId,
-    settings: CFWorkerAIChatSettings = {},
+    settings: CFWorkerAISettings = {},
   ) =>
     new CFWorkerAIChatLanguageModel( modelId, settings, {
       provider: 'cfworkerai.chat',
@@ -138,14 +143,30 @@ export function createCFWorkerAI(
       fetch: options.fetch,
     } );
 
+  const createRESTModel = (
+    modelId: CFWorkerAIChatModelId,
+    settings: CFWorkerAIRESTSettings = {},
+  ) => new CFWorkerAIRESTModel( modelId, settings,
+    {
+      provider: 'cfworkerai.rest',
+      baseURL,
+      headers: getHeaders,
+      generateId: options.generateId ?? generateId,
+      fetch: options.fetch,
+    } );
+
   const provider = function (
     modelId: CFWorkerAIChatModelId,
-    settings?: CFWorkerAIChatSettings,
+    settings?: CFWorkerAISettings,
   ) {
     if ( new.target ) {
       throw new Error(
         'The CFWorkerAI model function cannot be called with the new keyword.',
       );
+    }
+
+    if ( settings?.use_rest === true ) {
+      return createRESTModel( modelId, settings );
     }
 
     return createChatModel( modelId, settings );
@@ -155,6 +176,7 @@ export function createCFWorkerAI(
   provider.chat = createChatModel;
   provider.embedding = createEmbeddingModel;
   provider.textEmbedding = createEmbeddingModel;
+  provider.rest = createRESTModel;
 
   return provider as CFWorkerAIProvider;
 }

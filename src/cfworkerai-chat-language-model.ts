@@ -145,7 +145,7 @@ export class CFWorkerAIChatLanguageModel implements LanguageModelV1 {
     const { args, warnings } = this.getArgs( options );
 
     const { responseHeaders, value: response } = await postJsonToApi( {
-      url: `${this.config.baseURL}/chat/completions`,
+      url: `${this.config.baseURL}/v1/chat/completions`,
       headers: combineHeaders( this.config.headers(), options.headers ),
       body: args,
       failedResponseHandler: cfworkeraiFailedResponseHandler,
@@ -184,7 +184,7 @@ export class CFWorkerAIChatLanguageModel implements LanguageModelV1 {
     const { args, warnings } = this.getArgs( options );
 
     const { responseHeaders, value: response } = await postJsonToApi( {
-      url: `${this.config.baseURL}/chat/completions`,
+      url: `${this.config.baseURL}/v1/chat/completions`,
       headers: combineHeaders( this.config.headers(), options.headers ),
       body: {
         ...args,

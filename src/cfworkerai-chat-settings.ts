@@ -6,7 +6,6 @@ export type CFWorkerAIChatModelId =
   | '@hf/google/gemma-7b-it'
   | '@cf/meta/llama-3-8b-instruct-awq'
   | '@cf/defog/sqlcoder-7b-2'
-  | '@cf/openai/whisper'
   | ( string & {} );
 
 export interface CFWorkerAIChatSettings {
@@ -16,4 +15,6 @@ Whether to inject a safety prompt before all conversations.
 Defaults to `false`.
    */
   safePrompt?: boolean;
+
+  use_rest?: boolean;
 }

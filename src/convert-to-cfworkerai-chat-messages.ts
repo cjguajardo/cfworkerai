@@ -15,7 +15,6 @@ export function convertToCFWorkerAIChatMessages(
         messages.push( { role: 'system', content } );
         break;
       }
-
       case 'user': {
         messages.push( {
           role: 'user',
@@ -36,7 +35,6 @@ export function convertToCFWorkerAIChatMessages(
         } );
         break;
       }
-
       case 'assistant': {
         let text = '';
         const toolCalls: Array<{

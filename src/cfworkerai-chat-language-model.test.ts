@@ -5,6 +5,7 @@ import {
   convertReadableStreamToArray,
 } from '@ai-sdk/provider-utils/test';
 import { createCFWorkerAI } from './cfworkerai-provider';
+import { describe, it, expect } from 'vitest'
 
 const TEST_PROMPT: LanguageModelV1Prompt = [
   { role: 'user', content: [{ type: 'text', text: 'Hello' }] },
@@ -15,7 +16,7 @@ const model = provider.chat( 'cfworkerai-small-latest' );
 
 describe( 'doGenerate', () => {
   const server = new JsonTestServer(
-    process.env.CF_BASE_URL + '/chat/completions',
+    process.env.CF_BASE_URL + '/v1/chat/completions',
   );
 
   server.setupTestEnvironment();
