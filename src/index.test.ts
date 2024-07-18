@@ -48,7 +48,6 @@ describe( 'generateText from image', () => {
 
   it( 'should generate text from image', async () => {
 
-    // reads the image from ./test-assets/cgcapps_cj.jpg
     const image = await fetch( 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg' )
       .then( response => response.blob() )
 
@@ -64,8 +63,6 @@ describe( 'generateText from image', () => {
         }
       ]
     } )
-
-    console.log( { response } );
 
     expect( response ).toBeInstanceOf( GenerateTextResult )
   } )

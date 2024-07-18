@@ -23,7 +23,7 @@ Once installed, you have to setup the environment variables `CF_TOKEN` and `CF_B
 
 ```bash
 CF_TOKEN=YOUR_CLOUDFLARE_TOKEN
-CF_BASE_URL=https://gateway.ai.cloudflare.com/v1/{CLOUDFLARE_ACCOUNT_ID}/{GATEWAY_ID}/workers-ai/v1
+CF_BASE_URL=https://gateway.ai.cloudflare.com/v1/{CLOUDFLARE_ACCOUNT_ID}/{GATEWAY_ID}/workers-ai
 ```
 
 Your Cloudflare token can be found at: **[Cloudflare API Tokens](https://dash.cloudflare.com/profile/api-tokens)**
@@ -43,11 +43,13 @@ import { cfworkerai } from 'cfworkerai';
 import { cfworkerai } from 'cfworkerai';
 import { generateText } from 'ai';
 
+// Text to text - simple
 const result1 = await generateText({
   model: cfworkerai('@cf/meta/llama-2-7b-chat-fp16'),
   prompt: 'Write a vegetarian lasagna recipe for 4 people.',
 });
 
+// Text to text - chat
 const result2 = await streamText( {
     model: cfworkerai( '@cf/google/gemma-2b-it-lora' ),
     messages: [
@@ -56,6 +58,23 @@ const result2 = await streamText( {
         { role: 'assistant', content: 'Paris is the capital of France.' },
     ],
   } );
+
+// Image to text
+const image = await fetch( 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg' )
+      .then( response => response.blob() )
+
+const result3 = await generateText( {
+  model: cfworkerai( model, { use_rest: true } ),
+  messages: [
+    {
+      role: 'user',
+      content: [
+        { type: "text", text: 'Describe the image' },
+        { type: "image", image: await image.arrayBuffer() }
+      ]
+    }
+  ]
+} )
 ```
 
 <!-- ## Documentation -->
